@@ -34,7 +34,7 @@ ALLOWED_HOSTS = [
     'webserver',
     'localhost',
     '127.0.0.1',
-    '.render.com',
+    '*',
 ]
 
 # Application definition
