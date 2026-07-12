@@ -1,14 +1,14 @@
 install:
-	uv pip install --system -r pyproject.toml
+	uv sync
 
 collectstatic:
-	python manage.py collectstatic --no-input
+	uv run python manage.py collectstatic --no-input
 
 migrate:
-	python manage.py migrate
+	uv run python manage.py migrate
 
 build:
 	./build.sh
 
 render-start:
-	gunicorn task_manager.wsgi
+	uv run gunicorn task_manager.wsgi
