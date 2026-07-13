@@ -16,13 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from django.http import HttpResponse
-
-def home(request):
-    return HttpResponse("<h1>Привет от Менеджера Задач!</h1>")
+from django.views.generic import TemplateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', home, name='home'),
+    path('', TemplateView.as_view(template_name='index.html'), name='home'),
 ]
-
