@@ -1,0 +1,31 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<h1 class="my-4 display-4 fw-normal">Пользователи</h1>
+
+<table class="table table-striped table-bordered mt-3">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Имя пользователя</th>
+            <th>Полное имя</th>
+            <th>Дата создания</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for u in users %}
+        <tr>
+            <td>{{ u.id }}</td>
+            <td>{{ u.username }}</td>
+            <td>{{ u.first_name }} {{ u.last_name }}</td>
+            <td>{{ u.date_joined|date:"d.m.Y H:i" }}</td>
+            <td>
+                <a class="text-decoration-none me-2" href="{% url 'user_update' u.id %}">Изменить</a>
+                <a class="text-decoration-none text-danger" href="{% url 'user_delete' u.id %}">Удалить</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

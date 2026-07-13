@@ -1,0 +1,11 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<h1 class="mb-4 display-4 fw-normal">Удаление пользователя</h1>
+<p class="fs-5">Вы уверены, что хотите удалить {{ object.username }}?</p>
+
+<form method="post" class="mt-4">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger px-4">Да, удалить</button>
+</form>
+{% endblock %}
