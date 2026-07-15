@@ -1,0 +1,25 @@
+{% extends 'layout.html' %}
+{% load django_bootstrap5 %}
+
+{% block content %}
+<h1 class="mb-4 display-4 fw-normal">
+    {% if form.instance.pk %}
+        Изменение задачи
+    {% else %}
+        Создание задачи
+    {% endif %}
+</h1>
+
+<form method="post" class="mt-4">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+
+    <button type="submit" class="btn btn-primary mt-3 px-4">
+        {% if form.instance.pk %}
+            Изменить
+        {% else %}
+            Создать
+        {% endif %}
+    </button>
+</form>
+{% endblock %}

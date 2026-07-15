@@ -1,0 +1,45 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<h1 class="my-4 display-4 fw-normal">{{ task.name }}</h1>
+
+<div class="card bg-light p-4">
+    <div class="card-body">
+        <p class="fs-5">{{ task.description }}</p>
+        <hr>
+        <div class="row">
+            <div class="col-sm-6">
+                <strong>Автор:</strong> {{ task.author.first_name }} {{ task.author.last_name }}
+            </div>
+            <div class="col-sm-6">
+                <strong>Исполнитель:</strong>
+                {% if task.executor %}
+                    {{ task.executor.first_name }} {{ task.executor.last_name }}
+                {% else %}
+                    Не назначен
+                {% endif %}
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-sm-6">
+                <strong>Статус:</strong> {{ task.status.name }}
+            </div>
+            <div class="col-sm-6">
+                <strong>Дата создания:</strong> {{ task.created_at|date:"d.m.Y H:i" }}
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-12">
+                <strong>Метки:</strong>
+                <ul class="list-inline d-inline">
+                    {% for label in task.labels.all %}
+                        <li class="list-inline-item badge bg-secondary">{{ label.name }}</li>
+                    {% empty %}
+                        <span class="text-muted">Нет меток</span>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

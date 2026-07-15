@@ -22,7 +22,10 @@
                     </li>
                     {% if user.is_authenticated %}
                         <li class="nav-item">
-                            <a class="nav-link text-dark" href="{% url 'statuses_list' %}">Статусы</a>
+                         <a class="nav-link text-dark" href="{% url 'statuses_list' %}">Статусы</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="{% url 'tasks_list' %}">Задачи</a>
                         </li>
                         <li class="nav-item">
                             <form action="{% url 'logout' %}" method="post" class="m-0">
