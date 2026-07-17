@@ -79,3 +79,22 @@ class TasksCRUDTestCase(TestCase):
         response = self.client.post(url)
         self.assertRedirects(response, reverse('tasks_list'))
         self.assertTrue(Task.objects.filter(pk=self.task.id).exists())
+
+    def test_filter_tasks_by_status(self):
+        self.client.force_login(self.user1)
+        response = self.client.get(reverse('tasks_list'),
+                               {'status': self.status.id})
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, self.task.name)
+        response = self.client.get(reverse('tasks_list'), {'status': 999})
+        self.assertNotContains(response, self.task.name)
+
+    def test_filter_only_own_tasks(self):
+        self.client.force_login(self.user1)
+        response = self.client.get(reverse('tasks_list'), {'only_own_tasks': 'on'})
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, self.task.name)
+        self.client.force_login(self.user2)
+        response = self.client.get(reverse('tasks_list'), {'only_own_tasks': 'on'})
+        self.assertEqual(response.status_code, 200)
+        self.assertNotContains(response, self.task.name)
