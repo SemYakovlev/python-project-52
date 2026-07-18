@@ -28,4 +28,10 @@ urlpatterns = [
     path('labels/', include('labels.urls')),
     path('login/', UserLoginView.as_view(), name='login'),
     path('logout/', UserLogoutView.as_view(), name='logout'),
+    path('test-error/', trigger_error),
 ]
+
+
+def trigger_error(request):
+    division_by_zero = 1 / 0
+    return division_by_zero
