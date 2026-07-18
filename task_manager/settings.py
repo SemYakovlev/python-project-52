@@ -136,11 +136,9 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 DEBUG = True
 
 ROLLBAR_ACCESS_TOKEN = os.getenv('ROLLBAR_ACCESS_TOKEN')
-if ROLLBAR_ACCESS_TOKEN and not DEBUG:
+if ROLLBAR_ACCESS_TOKEN:
     ROLLBAR = {
         'access_token': ROLLBAR_ACCESS_TOKEN,
         'environment': 'development' if DEBUG else 'production',
-        'code_version': '1.0',
-        'branch': 'main',
         'root': BASE_DIR,
     }

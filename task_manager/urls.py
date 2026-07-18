@@ -19,6 +19,11 @@ from django.urls import path, include
 from django.views.generic import TemplateView
 from users.views import UserLoginView, UserLogoutView
 
+
+def trigger_error(request):
+    division_by_zero = 1 / 0
+    return division_by_zero
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', TemplateView.as_view(template_name='index.html'), name='home'),
@@ -30,8 +35,3 @@ urlpatterns = [
     path('logout/', UserLogoutView.as_view(), name='logout'),
     path('test-error/', trigger_error),
 ]
-
-
-def trigger_error(request):
-    division_by_zero = 1 / 0
-    return division_by_zero
