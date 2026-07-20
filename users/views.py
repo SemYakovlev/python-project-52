@@ -55,11 +55,12 @@ class UserDeleteView(LoginRequiredMixin, UserPermissionMixin, SuccessMessageMixi
 
     def post(self, request, *args, **kwargs):
         try:
-            response = super().post(request, *args, **kwargs)
-            messages.success(self.request, self.success_message)
-            return response
+            return super().post(request, *args, **kwargs)
         except ProtectedError:
-            messages.error(self.request, 'Невозможно удалить пользователя, потому что он используется')
+            messages.error(
+                self.request,
+                'Невозможно удалить пользователя, потому что он используется',
+            )
             return redirect('users_list')
 
 
