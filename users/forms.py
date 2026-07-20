@@ -16,17 +16,14 @@ class CustomUserCreationForm(UserCreationForm):
         self.fields['username'].label = 'Имя пользователя'
 
 
-class CustomUserUpdateForm(forms.ModelForm):
+class CustomUserUpdateForm(UserCreationForm):
     first_name = forms.CharField(label='Имя', required=True)
     last_name = forms.CharField(label='Фамилия', required=True)
-    password = None
 
-    class Meta:
+    class Meta(UserCreationForm.Meta):
         model = User
         fields = ('first_name', 'last_name', 'username')
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['username'].label = 'Имя пользователя'
-        if 'password' in self.fields:
-            del self.fields['password']

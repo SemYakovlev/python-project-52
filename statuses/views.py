@@ -43,9 +43,7 @@ class StatusDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
 
     def post(self, request, *args, **kwargs):
         try:
-            response = super().post(request, *args, **kwargs)
-            messages.success(self.request, self.success_message)
-            return response
+            return super().post(request, *args, **kwargs)
         except ProtectedError:
-            messages.error(self.request, 'Невозможно удалить статус')
+            messages.error(self.request, 'Невозможно удалить статус, так как он используется')
             return redirect('statuses_list')
