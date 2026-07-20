@@ -15,11 +15,7 @@
     {% bootstrap_form form %}
 
     <button type="submit" class="btn btn-primary mt-3 px-4">
-        {% if form.instance.pk %}
-            Изменить
-        {% else %}
-            Зарегистрировать
-        {% endif %}
-    </button>
+    {% if form.instance.pk %}Изменить{% else %}Зарегистрировать{% endif %}
+</button>
 </form>
 {% endblock %}

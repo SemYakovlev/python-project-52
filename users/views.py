@@ -15,6 +15,10 @@ class UserPermissionMixin(UserPassesTestMixin):
         return self.get_object() == self.request.user
 
     def handle_no_permission(self):
+        if not self.request.user.is_authenticated:
+            messages.error(self.request, 'Вы не авторизованы! Пожалуйста, авторизуйтесь.')
+            return redirect('login')
+
         messages.error(self.request, 'У вас нет прав для изменения.')
         return redirect('users_list')
 

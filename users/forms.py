@@ -16,7 +16,7 @@ class CustomUserCreationForm(UserCreationForm):
         self.fields['username'].label = 'Имя пользователя'
 
 
-class CustomUserUpdateForm(UserChangeForm):
+class CustomUserUpdateForm(forms.ModelForm):
     first_name = forms.CharField(label='Имя', required=True)
     last_name = forms.CharField(label='Фамилия', required=True)
     password = None
